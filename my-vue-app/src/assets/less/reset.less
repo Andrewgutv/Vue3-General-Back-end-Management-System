@@ -1,0 +1,130 @@
+// reset.less - 基础样式
+// 清除默认内外边距
+* {
+  margin: 0;
+  padding: 0;
+  // 解决盒模型计算问题（border和padding不影响宽高）
+  box-sizing: border-box;
+}
+
+// 清除列表默认样式（去掉小圆点/数字）
+ul, ol, li {
+  list-style: none;
+}
+
+// 清除表单元素默认样式
+input, select, textarea, button {
+  // 去掉默认边框和轮廓
+  border: none;
+  outline: none;
+  // 继承父元素字体样式
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  // 清除iOS默认外观（如input[type=number]的上下箭头）
+  -webkit-appearance: none;
+  appearance: none;
+  // 背景透明（避免默认白色背景）
+  background: transparent;
+}
+
+// 清除按钮默认样式
+button {
+  cursor: pointer;
+  // 去掉点击时的默认高亮
+  -webkit-tap-highlight-color: transparent;
+}
+
+// 清除链接默认样式
+a {
+  text-decoration: none; // 去掉下划线
+  color: inherit; // 继承父元素颜色
+  // 去掉点击时的默认高亮
+  -webkit-tap-highlight-color: transparent;
+}
+
+// 清除图片默认样式
+img {
+  // 图片自适应容器
+  max-width: 100%;
+  height: auto;
+  // 去掉图片底部默认空白（因inline元素特性导致）
+  display: block;
+  // 防止图片拉伸变形
+  object-fit: cover; // 可选：根据需求调整（contain/cover等）
+}
+
+// 清除表格默认样式
+table {
+  border-collapse: collapse; // 合并边框
+  border-spacing: 0;
+}
+
+// 清除浮动（解决父元素高度塌陷）
+.clearfix {
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+  }
+}
+
+// 基础字体设置（统一浏览器字体）
+body {
+  // 基础字体大小（16px为浏览器默认，方便rem计算）
+  font-size: 16px;
+  // 字体族（优先使用系统默认无衬线字体，保证跨平台一致性）
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  // 字体颜色（默认深灰色，比纯黑更易读）
+  color: #333;
+  // 背景色（默认白色）
+  background-color: #f5f5f5;
+  // 禁止文本选中（可选，根据需求开启）
+  // user-select: none;
+  // 解决移动端滚动卡顿
+  -webkit-overflow-scrolling: touch;
+  // overflow-scrolling: touch;
+  overflow: hidden;
+  width: 100%;
+  height: 1200px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  // 禁止文本换行
+  white-space: nowrap;
+  
+}
+
+// 解决HTML5新标签兼容问题（IE浏览器）
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block;
+}
+
+// 清除输入框 placeholder 默认样式（可根据需求修改颜色）
+::placeholder {
+  color: #999;
+  opacity: 1; // 修复Firefox中placeholder透明度问题
+}
+
+// 清除聚焦样式（如需自定义聚焦效果，可在此基础上修改）
+:focus {
+  outline: none;
+}
+
+// 禁止文本换行（单行文本溢出显示省略号）
+.text-nowrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 多行文本溢出显示省略号（默认2行，可通过less变量调整）
+.text-ellipsis(@line: 2) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @line;
+  overflow: hidden;
+}
